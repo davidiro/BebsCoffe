@@ -1,0 +1,59 @@
+body {
+    background-color: #d0ac77;
+}
+
+.login {
+    text-align: right;
+    padding-left: 15px;
+    gap: 15px;
+
+}
+
+.loginNav {
+    font-size: 20px;
+    gap: 20px;
+}
+
+.loginNav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.Homecard {
+    position: relative;
+    margin-top: 30px;
+    border-radius: 10px;
+    background-image: url("coffeBackground1.jpg");
+    background-size: contain;     /* shows whole image */
+    background-repeat: no-repeat; /* prevents tiling */
+    background-position: center;  /* centers image */
+
+    min-height: 300px;
+    min-width: 150px;
+    box-shadow: black;
+}
+
+.ProductSearchHome button {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    height:30px;
+    width: 100px;
+    color: black;
+    font-size : 15px;
+    background-color: #d0ac77;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.featuredHeader{
+    justify-content: center;
+   display:flex;
+}
+
+.featuredHeader img{
+    margin-top: 20px;
+    height: 110px;
+   
+}
