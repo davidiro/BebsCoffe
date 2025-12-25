@@ -27,10 +27,7 @@ body {
     margin-top: 30px;
     border-radius: 10px;
     background-image: url("coffeBackground1.jpg");
-    background-size: contain;     /* shows whole image */
-    background-repeat: no-repeat; /* prevents tiling */
-    background-position: center;  /* centers image */
-
+    background-size: cover;
     min-height: 300px;
     min-width: 150px;
     box-shadow: black;
