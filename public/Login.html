@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <head>
     <title> Login Page </title>
-    <Link rel = "stylesheet" href="Login.css">
+    <Link rel="stylesheet" href="Login.css">
     <meta charset="UTF-8">
 </head>
+
 <body>
     <div class="blur-overlay"></div>
 
@@ -18,25 +20,46 @@
             <button type="submit" id="myBtn" onClick="handleSignUp(event)"> Login </button>
         </form>
         <script>
-            function handleSignUp(event){
+            function handleSignUp(event) {
                 console.log("Login button clicked");
 
-                 event.preventDefault();
+                event.preventDefault();
 
-             const  Username = document.getElementById("email");
-             const  Password = document.getElementById("password");
-             const  Confirm_Password = document.getElementById("confirm_password");
+                const email = document.getElementById("email");
+                const Password = document.getElementById("password");
+                const Confirm_Password = document.getElementById("confirm_password");
 
-                 //user Validtion
-                    if (Password.value !== Confirm_Password.value){
-                        alert("Password does not match");
-                        return;
+                //user Validtion
+                if (Password.value !== Confirm_Password.value) {
+                    alert("Password does not match");
+                    return;
+                }
+
+                //fetch request to server
+                fetch("Login", {
+                    Method: "POST",
+                    headers: { "Content-Type": "Application/json" },
+                    bode: JSON.stringify({
+                        email : email.value,
+                        email: email.value,
+                        password: Password.value,
+                    })
+
+                })
+
+                .then (res => res.json())
+                .then (data =>{
+                    if (data.message == "User Logged in "){
+                        alert ("User logged in successfully")
+                        window.location.href = "Homepage.html";
                     }
-
-                    else{
-                        alert("Login Successful");
+                    else {
+                        alert("User Not found")
+                        console.log(data.message)
                     }
-                 //fetch request to server 
+                }
+                    
+                )
             }
 
 
