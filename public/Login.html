@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <title> Login Page </title>
+    <Link rel = "stylesheet" href="Login.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+
+    <div class="card">
+
+        <form id="signupForm">
+            <legend>Login</legend>
+            <input id="email" name="email" required placeholder="*email">
+            <input id="password" name="password" type="password" placeholder="*password" required>
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="*confirmpassword">
+
+            <button type="submit" id="myBtn" onClick="handleSignUp(event)"> Login </button>
+        </form>
+        <script>
+            function handleSignUp(event){
+                console.log("Login button clicked");
+
+                 event.preventDefault();
+
+             const  Username = document.getElementById("email");
+             const  Password = document.getElementById("password");
+             const  Confirm_Password = document.getElementById("confirm_password");
+
+                 //user Validtion
+                    if (Password.value !== Confirm_Password.value){
+                        alert("Password does not match");
+                        return;
+                    }
+
+                    else{
+                        alert("Login Successful");
+                    }
+                 //fetch request to server 
+            }
+
+
+        </script>
+
+</body>
