@@ -1,21 +1,27 @@
 <!DOCTYPE html>
+
 <head>
     <title>
         Products page
     </title>
-    <link rel = "stylesheet" href = "products.css">
+    <link rel="stylesheet" href="products.css">
 </head>
+
 <body>
-<div id = "hamburger">  ☰   </div>
+    <div id="hamburger"> ☰ </div>
 
 
-   <div class="sidenav" id = "sideView">
-      <a href="javascript:void(0)" class="closebtn" id = "closeBtn" onclick="togglenav()">×</a>
-      <a href="contactus.html"> contact us</a>
-      <a href="Aboutus.html"> About us </a>
-      <a href="reservation.html"> pick up reservation </a>
-      <a href=" products.html"> products </a>
-   </div>
+    <div class="sidenav" id="sideView">
+        <a href="javascript:void(0)" class="closebtn" id="closeBtn" onclick="togglenav()">×</a>
+        <a href="Homepage.html"> Home </a>
+        <a href="contactus.html"> contact us</a>
+        <a href="Aboutus.html"> About us </a>
+        <a href="reservation.html"> pick up reservation </a>
+        <a href=" products.html"> products </a>
+    </div>
+    <div id=" grid">
+
+    </div>
 
 
 
@@ -23,19 +29,56 @@
 
 
 
+    <script>
+        const menuBtn = document.getElementById("hamburger");
+        const sideView = document.getElementById("sideView");
+        const closeBtn = document.getElementById("closeBtn");
 
-<script>
-     const menuBtn = document.getElementById("hamburger");
-    const sideView = document.getElementById("sideView");
-    const closeBtn = document.getElementById("closeBtn");
+        menuBtn.addEventListener("click", () => {
+            sideView.style.width = "250px";
+        });
 
-    menuBtn.addEventListener("click", () => {
-        sideView.style.width = "250px";
-    });
+        closeBtn.addEventListener("click", () => {
+            sideView.style.width = "0";
+        });
 
-    closeBtn.addEventListener("click", () => {
-        sideView.style.width = "0";
-    });
-</script>
+        //get request for product information
+        let page = 1;
+        loading = false // prevent multiple requests at a time.
+
+        function loadProducts() {
+            if (loading)
+                return;
+
+            loading = true;// start loading data;
+
+            fetch(`/products?page=${page}`)
+                .then(res => res.json())
+                .then(products => {
+                    const grid = document.getElementById("grid");
+                    products.forEach(element => {//create card for each product
+                        const card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML = `<img src="${element.image}" />`;
+                        card.innerHTML += `<p>${element.name}</p>`;
+                        grid.appendChild(card);
+                    });
+                    page++
+                    loading = false;
+                });
+        }
+        
+        //detect user scroll event 
+        window.addEventListener("scroll", () => {
+            if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 200
+            ) {
+                loadProducts();
+            }
+        })
+
+        loadProducts();
+    </script>
 
 </body>
