@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Products page
+    </title>
+    <link rel = "stylesheet" href = "products.css">
+</head>
+<body>
+<div id = "hamburger">  ☰   </div>
+
+
+   <div class="sidenav" id = "sideView">
+      <a href="javascript:void(0)" class="closebtn" id = "closeBtn" onclick="togglenav()">×</a>
+      <a href="contactus.html"> contact us</a>
+      <a href="Aboutus.html"> About us </a>
+      <a href="reservation.html"> pick up reservation </a>
+      <a href=" products.html"> products </a>
+   </div>
+
+
+
+
+
+
+
+
+<script>
+     const menuBtn = document.getElementById("hamburger");
+    const sideView = document.getElementById("sideView");
+    const closeBtn = document.getElementById("closeBtn");
+
+    menuBtn.addEventListener("click", () => {
+        sideView.style.width = "250px";
+    });
+
+    closeBtn.addEventListener("click", () => {
+        sideView.style.width = "0";
+    });
+</script>
+
+</body>

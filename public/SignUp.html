@@ -42,6 +42,7 @@
                 fetch('/signup', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
+                    //body of request to be handles by endpoint
                     body: JSON.stringify({
                         username: Username.value.trim(),
                         email: Email.value.trim(),

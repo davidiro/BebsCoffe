@@ -12,9 +12,10 @@
 
    <div class="sidenav" id = "sideView">
       <a href="javascript:void(0)" class="closebtn" id = "closeBtn" onclick="togglenav()">×</a>
-      <a href="login.html"> Login</a>
+      <a href="Homepage.html"> Home </a>
+      <a href="contactus.html"> contact us</a>
       <a href="Aboutus.html"> About us </a>
-      <a href=" contactus.html"> contact us </a>
+      <a href="reservation.html"> pick up reservation </a>
       <a href=" products.html"> products </a>
    </div>
 
@@ -30,7 +31,7 @@
    <div class="Homecard">
       <div class="ProductSearchHome">
 
-         <button type="submit"> ShopNow</button>
+         <button type="submit" id = "shop" onclick="MovetoProd(event)"> ShopNow</button>
       </div>
 
    </div>
@@ -39,6 +40,15 @@
    </div>
 
 <script>
+
+    function MovetoProd(event){
+      event.preventDefault();
+
+      window.location.href = "products.html";//send to products page
+      
+    }
+
+
     const menuBtn = document.getElementById("hamburger");
     const sideView = document.getElementById("sideView");
     const closeBtn = document.getElementById("closeBtn");
