@@ -1,31 +1,55 @@
 <!DOCTYPE html>
-<head> 
-<meta charset="UTF-8">
-<title> Home page</title>
-<link rel = "stylesheet" href = "HomeStyle.css">
+
+<head>
+   <meta charset="UTF-8">
+   <title> Home page</title>
+   <link rel="stylesheet" href="HomeStyle.css">
 </head>
+
 <body>
-
-    <!-- Homepage for users to login or signup -->
-     <div class="login">
-       <nav class = loginNav>
-        <a href = "login.html"> Login </a>
-        <a href = "signup.html"> Sign Up </a>
-       </nav>
-     </div>
-    <!-- Homeage image -->
-     <div class = "Homecard">
-        <div class = "ProductSearchHome">
-
-            <button type = "submit"> ShopNow</button>
-        </div>
-
-     </div>
-     <div class = "featuredHeader">
-        <img src = "featured.png">
-     </div>
+   <div id = "hamburger">  ☰   </div>
 
 
+   <div class="sidenav" id = "sideView">
+      <a href="javascript:void(0)" class="closebtn" id = "closeBtn" onclick="togglenav()">×</a>
+      <a href="login.html"> Login</a>
+      <a href="Aboutus.html"> About us </a>
+      <a href=" contactus.html"> contact us </a>
+      <a href=" products.html"> products </a>
+   </div>
 
+   <!-- Homepage for users to login or signup -->
+   <div class="login">
+      <nav class=loginNav>
+         <a href="login.html"> Login </a>
+         <a href="signup.html"> Sign Up </a>
+      </nav>
+   </div>
+
+   <!-- Homeage image -->
+   <div class="Homecard">
+      <div class="ProductSearchHome">
+
+         <button type="submit"> ShopNow</button>
+      </div>
+
+   </div>
+   <div class="featuredHeader">
+      <img src="images/featured.png">
+   </div>
+
+<script>
+    const menuBtn = document.getElementById("hamburger");
+    const sideView = document.getElementById("sideView");
+    const closeBtn = document.getElementById("closeBtn");
+
+    menuBtn.addEventListener("click", () => {
+        sideView.style.width = "250px";
+    });
+
+    closeBtn.addEventListener("click", () => {
+        sideView.style.width = "0";
+    });
+</script>
 
 </body>

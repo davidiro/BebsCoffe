@@ -10,29 +10,54 @@ app.use(express.static("public"));
 
 app.use(bodyParser.json());
 
-db.run(`CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserName TEXT,
-    Password TEXT,
-    Email TEXT
-)`);
+db.run(`
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        UserName TEXT,
+        Password TEXT,
+        Email TEXT
+    )
+`);
 
+// SIGNUP
 app.post("/signup", (req, res) => {
     const { username, email, password } = req.body;
+
     db.run(
-        `INSERT INTO users (UserName, Password, Email) VALUES (?, ?, ?)`,
+        "INSERT INTO users (UserName, Password, Email) VALUES (?, ?, ?)",
         [username, password, email],
-        function(err){
-            if(err){
-                console.log(err); // useful for debugging
-                res.status(500).json({message: "Error creating user"});
+        err => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ message: "Error creating user" });
             } else {
-                res.status(200).json({message: "User created successfully"});
+                res.json({ message: "User created successfully" });
             }
         }
     );
 });
 
+// LOGIN
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+
+    db.get(
+        "SELECT * FROM users WHERE Email = ? AND Password = ?",
+        [email, password],
+        (err, user) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ message: "Server error" });
+            } else if (!user) {
+                res.status(401).json({ message: "Invalid email or password" });
+            } else {
+                res.json({ message: "Login successful" });
+            }
+        }
+    );
+});
+
+// LISTEN 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });

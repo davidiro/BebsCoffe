@@ -8,15 +8,14 @@
 
 <body>
     <div class="blur-overlay"></div>
-
+    
     <div class="card">
 
         <form id="signupForm">
             <legend>Login</legend>
             <input id="email" name="email" required placeholder="*email">
             <input id="password" name="password" type="password" placeholder="*password" required>
-            <input id="confirm_password" name="confirm_password" type="password" placeholder="*confirmpassword">
-
+            
             <button type="submit" id="myBtn" onClick="handleSignUp(event)"> Login </button>
         </form>
         <script>
@@ -27,39 +26,31 @@
 
                 const email = document.getElementById("email");
                 const Password = document.getElementById("password");
-                const Confirm_Password = document.getElementById("confirm_password");
-
-                //user Validtion
-                if (Password.value !== Confirm_Password.value) {
-                    alert("Password does not match");
-                    return;
-                }
+                
 
                 //fetch request to server
-                fetch("Login", {
-                    Method: "POST",
-                    headers: { "Content-Type": "Application/json" },
-                    bode: JSON.stringify({
-                        email : email.value,
+                fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
                         email: email.value,
-                        password: Password.value,
+                        password: Password.value
                     })
-
                 })
 
-                .then (res => res.json())
-                .then (data =>{
-                    if (data.message == "User Logged in "){
-                        alert ("User logged in successfully")
-                        window.location.href = "Homepage.html";
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.message == "Login successful") {
+                            alert("User logged in successfully")
+                            window.location.href = "Homepage.html";
+                        }
+                        else {
+                            alert("User Not found")
+                            console.log(data.message)
+                        }
                     }
-                    else {
-                        alert("User Not found")
-                        console.log(data.message)
-                    }
-                }
-                    
-                )
+
+                    )
             }
 
 
