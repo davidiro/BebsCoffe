@@ -37,7 +37,7 @@
 
         //get request for product information
         let page = 1;
-        loading = false // prevent multiple requests at a time.
+        let loading = false // prevent multiple requests at a time.
 
         function loadProducts() {
             if (loading)
@@ -49,14 +49,17 @@
                 .then(res => res.json())
                 .then(products => {
                     const grid = document.getElementById("grid");
+
                     products.forEach(element => {//create card for each product
                         const card = document.createElement("div");
                         card.className = "card";
-                        card.innerHTML = `<img src="${element.image}" />`;
+                        card.innerHTML += `<img src="${element.image}" />`;
                         card.innerHTML += `<p>${element.name}</p>`;
+                        card.innerHTML += `<p>${element.price}</p>`;
                      
                         grid.appendChild(card);
                     });
+                    
                     page++
                     loading = false;
                 });

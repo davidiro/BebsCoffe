@@ -57,10 +57,7 @@ app.post("/login", (req, res) => {
     );
 });
 
-// LISTEN 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
+
 
 
 
@@ -84,11 +81,10 @@ db.serialize(() => {
 
         if (row.count === 0) {
             const products = [
-                { name: "Latte", price: 3.5, image: "/images/coffeBackground1.jpg" },
+                { name: "Latte", price: 3.5, image: "/images/featured.png"},
                 { name: "Cappuccino", price: 4.0, image: "/images/coffeimg2.jpg" },
-                { name: "Espresso", price: 2.5, image: "/image/coffeimg3.jpg" },
-                { name: "Mocha", price: 4.2, image: "/images/coffeimg3.jpg" },
-                
+                { name: "Espresso", price: 2.5, image: "/images/coffeimg3.jpg" },
+                { name: "Mocha", price: 4.2, image: "/images/featured.png" }
             ];
 
             const stmt = db.prepare(
