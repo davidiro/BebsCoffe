@@ -19,7 +19,10 @@
         <a href="reservation.html"> pick up reservation </a>
         <a href=" products.html"> products </a>
     </div>
-    <div id ="grid">
+    <input class = "search" type = "test" placeholder="*search products" > 
+
+    <div id="grid" class="grid">
+
     </div>
 
     <script> 
@@ -56,6 +59,7 @@
                         card.innerHTML += `<img src="${element.image}" />`;
                         card.innerHTML += `<p>${element.name}</p>`;
                         card.innerHTML += `<p>${element.price}</p>`;
+                        card.innerHTML += '<button class = "checkout"> Checkout </button>';
                      
                         grid.appendChild(card);
                     });
