@@ -57,9 +57,9 @@
                         const card = document.createElement("div");
                         card.className = "card";
                         card.innerHTML += `<img src="${element.image}" />`;
-                        card.innerHTML += `<p>${element.name}</p>`;
-                        card.innerHTML += `<p>${element.price}</p>`;
-                        card.innerHTML += '<button class = "checkout"> Checkout </button>';
+                        card.innerHTML += `<p> ${element.name}</p>`;
+                        card.innerHTML += `<p> $ ${element.price}</p>`;
+                        card.innerHTML += '<button class = "cart"> Add to cart </button>';
                      
                         grid.appendChild(card);
                     });

@@ -81,10 +81,15 @@ db.serialize(() => {
 
         if (row.count === 0) {
             const products = [
-                { name: "Latte", price: 3.5, image: "/images/featured.png"},
-                { name: "Cappuccino", price: 4.0, image: "/images/coffeimg2.jpg" },
-                { name: "Espresso", price: 2.5, image: "/images/coffeimg3.jpg" },
-                { name: "Mocha", price: 4.2, image: "/images/featured.png" }
+                { name: "Latte", price: 3.99, image: "/images/breakfastsan.webp"},
+                { name: "Cappuccino", price: 4.25, image: "/images/coffeimg2.jpg" },
+                { name: "Espresso", price: 2.15, image: "/images/coffeimg3.jpg" },
+                { name: "Mocha", price: 5.0, image: "/images/chocolate_mocha.webp" },
+                { name: "cake", price: 7.15, image: "/images/cake_image.jpg" },
+                { name: "breakfast san", price: 4.25, image: "/images/breakfastsan.webp"},
+                { name: "Mango juice", price: 5.99, image: "/images/mango_juice.avif"},
+                { name: "espresso", price: 3.50, image: "/images/espresso.avif"},
+                { name: "bacon sandwitch", price: 3.50, image: "/images/bacon_san.webp"},
             ];
 
             const stmt = db.prepare(
