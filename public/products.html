@@ -55,6 +55,7 @@
 
                     products.forEach(element => {//create card for each product
                         const card = document.createElement("div");
+                        //elements to be addded to the card for the grid 
                         card.className = "card";
                         card.innerHTML += `<img src="${element.image}" />`;
                         card.innerHTML += `<p> ${element.name}</p>`;

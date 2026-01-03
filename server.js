@@ -63,7 +63,7 @@ app.post("/login", (req, res) => {
 
 // Create products table + insert sample data safely
 db.serialize(() => {
-
+    
     db.run(`
         CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
