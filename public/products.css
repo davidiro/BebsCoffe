@@ -86,7 +86,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     height: 30px;
-    margin-left: 40%;
+    padding-left: 30px;
+    margin-right: 270px;
     padding-left: 30px;
 
 }
@@ -99,4 +100,10 @@ body {
     font-size : 15px;
     background-color: #d0ac77;
     box-shadow: 0 4px 10px rgba(0, 0, 0, );
+}
+.searchCard{
+    justify-content: center;
+    display: flex;
+    margin-left: 270px;
+
 }

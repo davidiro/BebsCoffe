@@ -22,13 +22,13 @@
             function handleSignUp(event) {
                 console.log("Login button clicked");
 
-                event.preventDefault();
+                event.preventDefault();//prevent regular page reload 
 
                 const email = document.getElementById("email");
                 const Password = document.getElementById("password");
                 
 
-                //fetch request to server
+                //fetch (get) request to server
                 fetch("/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -39,6 +39,7 @@
                 })
 
                     .then(res => res.json())
+                    
                     .then(data => {
                         if (data.message == "Login successful") {
                             alert("User logged in successfully")

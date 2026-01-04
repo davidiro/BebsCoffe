@@ -19,17 +19,25 @@
         <a href="reservation.html"> pick up reservation </a>
         <a href=" products.html"> products </a>
     </div>
-    <input class = "search" type = "test" placeholder="*search products" > 
+
+
+    <div class=searchCard>
+        <input class="search" id = "search" type="text" placeholder="*search products">
+
+    </div>
+
 
     <div id="grid" class="grid">
 
     </div>
 
-    <script> 
+    <script>
         const menuBtn = document.getElementById("hamburger");
+
         const sideView = document.getElementById("sideView");
         const closeBtn = document.getElementById("closeBtn");
 
+        //expand navigation bar 
         menuBtn.addEventListener("click", () => {
             sideView.style.width = "250px";
         });
@@ -39,8 +47,13 @@
         });
 
         //get request for product information
+
+        const grid = document.getElementById("grid");
+
+        let Items = []; //array to display products
         let page = 1;
         let loading = false // prevent multiple requests at a time.
+        const searchBar = document.getElementById("search");
 
         function loadProducts() {
             if (loading)
@@ -49,10 +62,8 @@
             loading = true;// start loading data;
 
             fetch(`/products?page=${page}`)
-                .then(res => res.json())
+                .then(res => res.json())//not sending only recieveing
                 .then(products => {
-                    const grid = document.getElementById("grid");
-
                     products.forEach(element => {//create card for each product
                         const card = document.createElement("div");
                         //elements to be addded to the card for the grid 
@@ -61,15 +72,44 @@
                         card.innerHTML += `<p> ${element.name}</p>`;
                         card.innerHTML += `<p> $ ${element.price}</p>`;
                         card.innerHTML += '<button class = "cart"> Add to cart </button>';
-                     
+
                         grid.appendChild(card);
+
+                       
                     });
-                    
+
+                     products.forEach(item => { //send products to the Item array 
+                            Items.push(item);
+                        })
+
                     page++
                     loading = false;
                 });
         }
-        
+
+        function displayProducts(items) {//function to display products 
+            grid.innerHTML = "";
+            items.forEach(element => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML += `<img src="${element.image}" />`;
+                card.innerHTML += `<p> ${element.name}</p>`;
+                card.innerHTML += `<p> $ ${element.price}</p>`;
+                card.innerHTML += '<button class = "cart"> Add to cart </button>';
+
+                grid.appendChild(card);
+            })
+
+        }
+
+        searchBar.addEventListener("input", () => {
+            let keyword = searchBar.value.toLowerCase();//key word for filtered seacrch
+            let filtered = Items.filter(product =>{
+               return product.name.toLowerCase().includes(keyword)
+            })
+            displayProducts(filtered)
+        })
+
         //detect user scroll event 
         window.addEventListener("scroll", () => {
             if (
