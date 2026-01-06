@@ -127,6 +127,42 @@ app.get("/products", (req, res) => {
 });
 
 
+db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Featured (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER NOT NULL,
+            position INTEGER NOT NULL,
+            FOREIGN KEY (product_id) REFERENCES products(id)
+        )
+    `);
+});
+
+app.get("/featured", (req, res) => {
+    const page = Number(req.query.page) || 1;
+    const limit = 4; // products per slide
+    const offset = (page - 1) * limit;
+
+    db.all(
+        `
+        SELECT p.id, p.name, p.price, p.image
+        FROM Featured f
+        JOIN products p ON f.product_id = p.id
+        ORDER BY f.position
+        LIMIT ? OFFSET ?
+        `,
+        [limit, offset],
+        (err, rows) => {
+            if (err) {
+                console.error("DB error:", err);
+                return res.status(500).json({ message: "Database error" });
+            }
+            res.json(rows);
+        }
+    );
+});
+
+
 // Start server listening 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

@@ -7,11 +7,11 @@
 </head>
 
 <body>
-   <div id = "hamburger">  ☰   </div>
+   <div id="hamburger"> ☰ </div>
 
 
-   <div class="sidenav" id = "sideView">
-      <a href="javascript:void(0)" class="closebtn" id = "closeBtn" onclick="togglenav()">×</a>
+   <div class="sidenav" id="sideView">
+      <a href="javascript:void(0)" class="closebtn" id="closeBtn" onclick="togglenav()">×</a>
       <a href="Homepage.html"> Home </a>
       <a href="contactus.html"> contact us</a>
       <a href="Aboutus.html"> About us </a>
@@ -31,7 +31,7 @@
    <div class="Homecard">
       <div class="ProductSearchHome">
 
-         <button type="submit" id = "shop" onclick="MovetoProd(event)"> ShopNow</button>
+         <button type="submit" id="shop" onclick="MovetoProd(event)"> ShopNow</button>
       </div>
 
    </div>
@@ -39,27 +39,63 @@
       <img src="images/featured.png">
    </div>
 
-<script>
+   <div class="featured-wrapper">
+      <button id="prev">◀</button>
 
-    function MovetoProd(event){
-      event.preventDefault();
+      <div class="featured-viewport">
+         <div id="featuredRow" class="featured-row"></div>
+      </div>
 
-      window.location.href = "products.html";//send to products page
+      <button id="next">▶</button>
+   </div>
+
+
+   <script>
+
+      function MovetoProd(event) {
+         event.preventDefault();
+
+         window.location.href = "products.html";//send to products page
+
+      }
+
+      const row = document.getElementById("featuredRow")
+      const menuBtn = document.getElementById("hamburger");
+      const sideView = document.getElementById("sideView");
+      const closeBtn = document.getElementById("closeBtn");
+      let page = 1; //page nummber for features row
+
+
+      menuBtn.addEventListener("click", () => {
+         sideView.style.width = "250px";
+      });
+
+      closeBtn.addEventListener("click", () => {
+         sideView.style.width = "0";
+      });
+
       
-    }
+      function loadFeatured() {
+         let loading = false;
+         fetch('/featured?page = ${page}')
+            .then(res => res.json)
+            .then(products => {
+               row.innerHTML = ""
+               products.array.forEach(element => {
+                  const card = document.createElement("div");
+                  card.className = "card"
+                  //elements to be added to featured card 
+                  card.innerHTML += '<img src ="${element.image"} >'
+                  card.innerHTML += '<p> ${element.name} </p>'
+                  card.innerHTML += '<button> add to cart </button>'
 
+                   row.appendChild(card)
+               });
+              
+            })
+      }
+      loadFeatured();
 
-    const menuBtn = document.getElementById("hamburger");
-    const sideView = document.getElementById("sideView");
-    const closeBtn = document.getElementById("closeBtn");
-
-    menuBtn.addEventListener("click", () => {
-        sideView.style.width = "250px";
-    });
-
-    closeBtn.addEventListener("click", () => {
-        sideView.style.width = "0";
-    });
-</script>
+   </script>
 
 </body>

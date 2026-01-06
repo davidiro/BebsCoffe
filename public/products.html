@@ -22,7 +22,7 @@
 
 
     <div class=searchCard>
-        <input class="search" id = "search" type="text" placeholder="*search products">
+        <input class="search" id="search" type="text" placeholder="*search products">
 
     </div>
 
@@ -75,12 +75,12 @@
 
                         grid.appendChild(card);
 
-                       
+
                     });
 
-                     products.forEach(item => { //send products to the Item array 
-                            Items.push(item);
-                        })
+                    products.forEach(item => { //send products to the Item array 
+                        Items.push(item);
+                    })
 
                     page++
                     loading = false;
@@ -104,8 +104,8 @@
 
         searchBar.addEventListener("input", () => {
             let keyword = searchBar.value.toLowerCase();//key word for filtered seacrch
-            let filtered = Items.filter(product =>{
-               return product.name.toLowerCase().includes(keyword)
+            let filtered = Items.filter(product => {
+                return product.name.toLowerCase().includes(keyword)
             })
             displayProducts(filtered)
         })
@@ -120,7 +120,31 @@
             }
         })
 
+        //function to store most visited products 
+        function SendMostViewed() {
+
+            let rand =  Math.random();//random vale assinged to products to determine most used 
+            let name = Items.name;
+
+            fetch('/featured', {
+                method: "POST",
+                headers: { "Content-Type": "Application/json" },
+                body: JSON.stringify({
+                    rand,
+                    name
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message === "random value added siccessfully") {
+
+                        console.log("value created and added successfully")
+                    }
+                });
+        }
+
         loadProducts();
+        console.log(Items);
     </script>
 
 </body>
