@@ -51,6 +51,7 @@
         const grid = document.getElementById("grid");
 
         let Items = []; //array to display products
+        
         let page = 1;
         let loading = false // prevent multiple requests at a time.
         const searchBar = document.getElementById("search");
@@ -120,31 +121,9 @@
             }
         })
 
-        //function to store most visited products 
-        function SendMostViewed() {
-
-            let rand =  Math.random();//random vale assinged to products to determine most used 
-            let name = Items.name;
-
-            fetch('/featured', {
-                method: "POST",
-                headers: { "Content-Type": "Application/json" },
-                body: JSON.stringify({
-                    rand,
-                    name
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.message === "random value added siccessfully") {
-
-                        console.log("value created and added successfully")
-                    }
-                });
-        }
+       
 
         loadProducts();
-        console.log(Items);
     </script>
 
 </body>

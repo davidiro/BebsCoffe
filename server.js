@@ -11,6 +11,12 @@ app.use(express.static("public"));
 
 app.use(bodyParser.json());
 
+//load the home page
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/Homepage.html");
+});
+
+
 //create user table 
 db.run(`
     CREATE TABLE IF NOT EXISTS users (

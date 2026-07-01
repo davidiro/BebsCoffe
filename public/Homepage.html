@@ -12,7 +12,7 @@
 
    <div class="sidenav" id="sideView">
       <a href="javascript:void(0)" class="closebtn" id="closeBtn" onclick="togglenav()">×</a>
-      <a href="Homepage.html"> Home </a>
+     <a href="http://localhost:3000/Homepage.html"> Home</a>
       <a href="contactus.html"> contact us</a>
       <a href="Aboutus.html"> About us </a>
       <a href="reservation.html"> pick up reservation </a>
@@ -55,7 +55,7 @@
       function MovetoProd(event) {
          event.preventDefault();
 
-         window.location.href = "products.html";//send to products page
+         window.location.href = "products.html";;//send to products page
 
       }
 
@@ -63,6 +63,7 @@
       const menuBtn = document.getElementById("hamburger");
       const sideView = document.getElementById("sideView");
       const closeBtn = document.getElementById("closeBtn");
+      let loading = false;
       let page = 1; //page nummber for features row
 
 
@@ -76,24 +77,36 @@
 
       
       function loadFeatured() {
-         let loading = false;
-         fetch('/featured?page = ${page}')
-            .then(res => res.json)
-            .then(products => {
-               row.innerHTML = ""
-               products.array.forEach(element => {
-                  const card = document.createElement("div");
-                  card.className = "card"
-                  //elements to be added to featured card 
-                  card.innerHTML += '<img src ="${element.image"} >'
-                  card.innerHTML += '<p> ${element.name} </p>'
-                  card.innerHTML += '<button> add to cart </button>'
+    if (loading) return;
+    loading = true;
 
-                   row.appendChild(card)
-               });
-              
-            })
-      }
+    fetch(`/featured?page=${page}`)
+        .then(res => res.json())
+        .then(products => {
+            row.innerHTML = ""; // clear for next slide
+
+            products.forEach(element => {
+                const card = document.createElement("div");
+                card.className = "card";
+
+                card.innerHTML = `
+                    <img src="${element.image}" alt="${element.name}">
+                    <p>${element.name}</p>
+                    <button>Add to cart</button>
+                `;
+
+                row.appendChild(card);
+            });
+
+            page++;
+            loading = false;
+        })
+        .catch(err => {
+            console.error("Featured load error:", err);
+            loading = false;
+        });
+}
+
       loadFeatured();
 
    </script>
