@@ -55,3 +55,43 @@ body {
     border-radius: 20px;
     max-height: 20%;
 }
+.about-header img{
+    display: flex;
+    justify-content: center;
+    max-height: 150px;
+    margin-left:120px;
+}
+
+.card-wrapper{
+    justify-content:space-between;
+    display: flex;
+    gap:10%;
+    margin-top:50px
+}
+.mission-card,
+.founder-card {
+    background: #F5E6D3;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    padding: 20px;
+    width: 48%; /* makes them sit side-by-side */
+}
+
+.mission-card:hover,
+.founder-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.founder-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+.mission-card p {
+    font-size: large;
+    
+}
+.mission-card h1{
+    justify-content: center;
+    display:flex
+}
