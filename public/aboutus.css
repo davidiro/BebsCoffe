@@ -1,3 +1,57 @@
 body {
     background-color: #d0ac77;
 }
+/* Hamburger icon */
+#hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 15px;
+}
+
+/* Side navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    overflow-x: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+
+.sidenav a:hover {
+    background-color: #575757;
+}
+
+/* Close button */
+.closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+}
+  
+.about-header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 50%;
+}
+/*my videos styling*/
+.bays-cafe{
+    width: 100%;
+    margin-top: 10%;
+    border-radius: 20px;
+    max-height: 20%;
+}

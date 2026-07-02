@@ -7,11 +7,15 @@
 </head>
 
 <body>
-    <div id="hamburger"> ☰ </div>
+
+    <div class="about-header">
+        <div id="hamburger"> ☰ </div>
+        <h1 class="debs">Bays coffeshop</h1>
+    </div>
 
 
     <div class="sidenav" id="sideView">
-        <a href="javascript:void(0)" class="closebtn" id="closeBtn" onclick="togglenav()">×</a>
+        <a href="javascript:void(0)" class="closebtn" id="closeBtn" onclick="togglenav()"> x </a>
         <a href="http://localhost:3000/Homepage.html"> Home</a>
         <a href="contactus.html"> contact us</a>
         <a href="aboutus.html"> About us </a>
@@ -19,12 +23,31 @@
         <a href=" products.html"> products </a>
     </div>
 
-    <h1>
-        Bebs coffeshop
-    </h1>
+    <video class = "bays-cafe" controls autoplay muted loop playsinline><!--make the video play in a loop-->
+        <source src="https://res.cloudinary.com/bvkhcnvi/video/upload/v1782944291/beds_coffe.mp4">
+    </video>
+
+
+
     <p>
         At Bebs Coffee, our mission is to create a space where community, comfort, and quality come together.<br>
         We serve handcrafted drinks made from ethically sourced beans, fresh local ingredients, and a passion for
         hospitality — giving every guest a moment of warmth in their day.
     </p>
+    <script>
+        const menueBtn = document.getElementById("hamburger");
+        const sideview = document.getElementById("sideView");
+        const closeBtn = document.getElementById("closeBtn");
+
+        //open menue bar 
+        menueBtn.addEventListener("click", () => {
+            sideview.style.width = "250px";
+        });
+
+        //close menue bar
+        closeBtn.addEventListener("click", () => {
+            sideview.style.width = "0px";
+        })
+
+    </script>
 </body>
