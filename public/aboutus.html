@@ -104,10 +104,11 @@
                 .then(team => {
                     team.forEach(element => {
                         const card = document.createElement("div");
+                        card.className = "card";
                         card.innerHTML += `<img src="${element.IMAGE}" />`;
                         card.innerHTML += `<p>${element.EMPLOYEE_NAME}</p>`;
                         card.innerHTML += `<p>Worked here: ${element.YEARS} years</p>`;
-                        card.innerHTML += `<p>${element.EXPERIENCE}</p>`;
+                        card.innerHTML += `<p> ROLE: ${element.EXPERIENCE}</p>`;
 
 
                         grid.appendChild(card);
