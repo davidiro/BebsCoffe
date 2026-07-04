@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 //load the home page
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/Homepage.html");
+    res.sendFile(__dirname + "/public/Homepage.html");
 });
 
 
@@ -72,7 +72,7 @@ app.post("/login", (req, res) => {
 
 // Create products table + insert sample data safely
 db.serialize(() => {
-    
+
     db.run(`
         CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,15 +90,15 @@ db.serialize(() => {
 
         if (row.count === 0) {
             const products = [//products to be added to database for front end to recieve 
-                { name: "Latte", price: 3.99, image: "/images/breakfastsan.webp"},
+                { name: "Latte", price: 3.99, image: "/images/breakfastsan.webp" },
                 { name: "Cappuccino", price: 4.25, image: "/images/coffeimg2.jpg" },
                 { name: "Espresso", price: 2.15, image: "/images/coffeimg3.jpg" },
                 { name: "Mocha", price: 5.0, image: "/images/chocolate_mocha.webp" },
                 { name: "cake", price: 7.15, image: "/images/cake_image.jpg" },
-                { name: "breakfast san", price: 4.25, image: "/images/breakfastsan.webp"},
-                { name: "Mango juice", price: 5.99, image: "/images/mango_juice.avif"},
-                { name: "espresso", price: 3.50, image: "/images/espresso.avif"},
-                { name: "bacon sandwitch", price: 3.50, image: "/images/bacon_san.webp"},
+                { name: "breakfast san", price: 4.25, image: "/images/breakfastsan.webp" },
+                { name: "Mango juice", price: 5.99, image: "/images/mango_juice.avif" },
+                { name: "espresso", price: 3.50, image: "/images/espresso.avif" },
+                { name: "bacon sandwitch", price: 3.50, image: "/images/bacon_san.webp" },
             ];
 
             const stmt = db.prepare(
@@ -143,7 +143,7 @@ db.serialize(() => {
         )
     `);
 });
-
+//featured end point  
 app.get("/featured", (req, res) => {
     const page = Number(req.query.page) || 1;
     const limit = 4; // products per slide
@@ -168,6 +168,42 @@ app.get("/featured", (req, res) => {
     );
 });
 
+
+// Create employee table and add data without seralizable
+db.run(`
+    
+CREATE TABLE IF NOT EXISTS Employees (
+        EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        EMPLOYEE_NAME TEXT NOT NULL,
+        IMAGE TEXT NOT NULL,
+        YEARS INTEGER NOT NULL,
+        EXPERIENCE TEXT NOT NULL
+    )
+    
+`);
+
+
+db.run(`
+
+    INSERT INTO Employees (EMPLOYEE_NAME, IMAGE, YEARS, EXPERIENCE) VALUES
+    ('Robert Johnson', 'images/robert.webp', 5, 'Barista Specialist'),
+    ('Michael Smith', 'images/David.webp', 8, 'Cafe Manager'),
+    ('David irofuala', 'images/Mike.webp', 3, 'Pastry Chef'),
+    ('kanyinsola Adebisi', 'images/kanyin.webp', 4, 'Front of House Manager')
+`);
+
+
+
+// meet the team end point
+app.get("/team", (req, res) => {
+    db.all('SELECT * FROM Employees', (err, rows) => {
+        if (err) {
+            console.error("DB error:", err);
+            return res.status(500).json({ message: "Database error" });
+        }
+        res.json(rows);
+    });
+});
 
 // Start server listening 
 app.listen(port, () => {
