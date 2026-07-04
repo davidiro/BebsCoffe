@@ -105,6 +105,7 @@ body {
   height: auto;
   display: block;
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

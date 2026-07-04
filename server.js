@@ -168,30 +168,36 @@ app.get("/featured", (req, res) => {
     );
 });
 
-
 // Create employee table and add data without seralizable
-db.run(`
+// db.run(` 
+// CREATE TABLE IF NOT EXISTS Employees (
+//         EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+//         EMPLOYEE_NAME TEXT NOT NULL,
+//         IMAGE TEXT NOT NULL,
+//         YEARS INTEGER NOT NULL,
+//         EXPERIENCE TEXT NOT NULL
+//     )
     
-CREATE TABLE IF NOT EXISTS Employees (
-        EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        EMPLOYEE_NAME TEXT NOT NULL,
-        IMAGE TEXT NOT NULL,
-        YEARS INTEGER NOT NULL,
-        EXPERIENCE TEXT NOT NULL
-    )
-    
-`);
+// `);
 
 
-db.run(`
+//Avoid duplicate entries
+db.get("SELECT COUNT(*) AS count FROM Employees", (err, row) => {
+    if (err) {
+        console.error("COUNT error:", err);
+        return;
+    }
 
-    INSERT INTO Employees (EMPLOYEE_NAME, IMAGE, YEARS, EXPERIENCE) VALUES
-    ('Robert Johnson', 'images/robert.webp', 5, 'Barista Specialist'),
-    ('Michael Smith', 'images/David.webp', 8, 'Cafe Manager'),
-    ('David irofuala', 'images/Mike.webp', 3, 'Pastry Chef'),
-    ('kanyinsola Adebisi', 'images/kanyin.webp', 4, 'Front of House Manager')
-`);
-
+    if (row.count === 0) {
+        db.run(`
+            INSERT INTO Employees (EMPLOYEE_NAME, IMAGE, YEARS, EXPERIENCE) VALUES
+            ('Robert Johnson', 'images/robert.webp', 5, 'Barista Specialist'),
+            ('Michael Smith', 'images/David.webp', 8, 'Cafe Manager'),
+            ('David irofuala', 'images/Mike.webp', 3, 'Pastry Chef'),
+            ('kanyinsola Adebisi', 'images/kanyin.webp', 4, 'Front of House Manager')
+        `);
+    }
+});
 
 
 // meet the team end point
