@@ -95,3 +95,13 @@ body {
     justify-content: center;
     display:flex
 }
+.founder-card h1{
+    justify-content: center;
+    display:flex
+}
+/*responsive image*/
+.meet-team{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

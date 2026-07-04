@@ -35,7 +35,7 @@
             <h1> OUR MISSION</h1>
             <p>
                 At Bebs Coffee, our mission is to create a space where community, comfort, and quality come together in
-                every cup. We believe a coffee shop should be more than a place to grab a drink — it should be a
+                every cup. We believe a coffee shop should be more than a place to grab a drink it should be a
                 welcoming environment where people slow down, connect, and feel at home. Every detail in our café, from
                 the beans we source to the way we greet our guests, reflects our commitment to hospitality and
                 craftsmanship.
@@ -64,12 +64,22 @@
             </p>
         </div>
     </div>
+    <div class="meet-team">
+        <img src="images/meet the team.png">
+    </div>
+    <div class="grid">
+
+    </div>
 
 
     <script>
         const menueBtn = document.getElementById("hamburger");
         const sideview = document.getElementById("sideView");
         const closeBtn = document.getElementById("closeBtn");
+        const loading = false;
+        const page = 1;
+        const grid = document.getElementsByClassName("grid");
+        let array = [];
 
         //open menue bar 
         menueBtn.addEventListener("click", () => {
@@ -81,5 +91,36 @@
             sideview.style.width = "0px";
         })
 
+
+        //get request for the team information
+        function loadTeam() {
+            if (loading) {
+                return;
+            }
+            loading = true; //load data from server
+            fetch("/team")//no pagination load entire page in 1 request
+                .then(res => res.json())
+                .then(team => {
+                    team.forEach(element => {
+                        const card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML += `<img src="${element.image}" />`;
+                        card.innerHTML += `<p> ${element.name}</p>`;
+                        card.innerHTML += `<p>  ${element.years}</p>`;//years the employee has worked
+                        card.innerHTML += `<p>  ${element.experience}</p>`;
+
+                        grid.appendChild(card);
+
+
+                    });
+
+                    team.forEach(item => {
+                        array.push(item)
+                    })
+
+                    loading = false;
+                })
+        }
+        loadTeam();
     </script>
 </body>
