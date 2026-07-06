@@ -54,9 +54,10 @@ body {
 /*my videos styling*/
 .bays-cafe{
     width: 100%;
-    margin-top: 10%;
+    margin-top: 50px;
     border-radius: 20px;
     max-height: 20%;
+    height :5%;
 }
 .about-header img{
     display: flex;
@@ -149,4 +150,65 @@ body {
 .card p{
     font-size: large;
     margin-top:2px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.outercard{
+    width: 100%;
+    overflow: auto;
+    padding: 40px;
+}
+.our-comminuty img{
+   justify-content: center;
+   display: flex;
+   padding-left: 90px;
+    align-items: center;
+}
+.comminuty-card {
+    justify-content: center;
+    background: #F5E6D3;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 10px;
+    float: left;
+    width: 45%;
+    height: 300px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+.comminuty-card img{
+    float:left;
+    width: 45%;
+    height: 80%;
+    border-radius: 100%;
+    margin-top: 30px;
+}
+.community-card p{
+    font-size: large;
+}
+.jazz-card{
+     justify-content: center;
+     float: left;
+    background: #F5E6D3;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 10px;
+    float: left;
+    width: 45%;
+    height: 300px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+.jazz-card img{
+    float:left;
+    width: 45%;
+    height: 80%;
+    border-radius: 100%;
+    margin-top: 30px;
+}
+.jazz-card p{
+    font-size: large;
 }
