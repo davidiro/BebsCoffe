@@ -219,13 +219,12 @@ body {
     font-size: large;
 }
 .kids-card{
-    margin-top:15px;
+
     display: flex;
     justify-content: center;
     background: #F5E6D3;
     border-radius: 10px;
     padding: 16px;
-    margin: 10px;
     width: 55%;
     margin: 30px auto; 
     height: 300px;

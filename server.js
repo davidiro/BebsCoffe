@@ -132,17 +132,45 @@ app.get("/products", (req, res) => {
     );
 });
 
-
+//create featured table and insert values.
 db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS Featured (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            product_id INTEGER NOT NULL,
-            position INTEGER NOT NULL,
-            FOREIGN KEY (product_id) REFERENCES products(id)
+            name TEXT NOT NULL,
+            price INTEGER NOT NULL,
+            image TEXT NOT NULL
         )
     `);
+
+    db.get("SELECT COUNT(*) AS count FROM Featured", (err, row) => {
+        if (err) {
+            console.error("COUNT error:", err);
+            return;
+
+        }
+
+        if (row.count === 0) {
+
+            db.run(`
+                INSERT INTO Featured (name, price, image) VALUES
+                ('bacon-sandwich', 8, 'images/featured-images/bacon-sandwich.jpg'),
+                ('bagels', 4, 'images/featured-images/bagels.jpg'),
+                ('breakfast sandwich', 10, 'images/featured-images/breakfast-sandwich.jpg'),
+                ('brownies', 7, 'images/featured-images/brownies.jpg'),
+                ('cheese-cake', 11, 'images/featured-images/cheese-cake.jpg'),
+                ('chicken sandwich', 9, 'images/featured-images/chicken-sandwich.jpg'),
+                ('chicken soup', 15, 'images/featured-images/chicken-soup.jpg'),
+                ('croissant', 10, 'images/featured-images/croissant.jpg'),
+                ('Donuts', 4, 'images/featured-images/donuts.jpg'),
+                ('muffins', 3, 'images/featured-images/muffins.jpg'),
+                ('turkey sandwich', 12, 'images/featured-images/turkey-sandwich.jpg')
+            `);
+        }
+    });
 });
+
+
 //featured end point  
 app.get("/featured", (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -151,10 +179,8 @@ app.get("/featured", (req, res) => {
 
     db.all(
         `
-        SELECT p.id, p.name, p.price, p.image
-        FROM Featured f
-        JOIN products p ON f.product_id = p.id
-        ORDER BY f.position
+        SELECT name, price, image
+        FROM Featured 
         LIMIT ? OFFSET ?
         `,
         [limit, offset],
@@ -169,16 +195,15 @@ app.get("/featured", (req, res) => {
 });
 
 // Create employee table and add data without seralizable
-// db.run(` 
-// CREATE TABLE IF NOT EXISTS Employees (
-//         EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-//         EMPLOYEE_NAME TEXT NOT NULL,
-//         IMAGE TEXT NOT NULL,
-//         YEARS INTEGER NOT NULL,
-//         EXPERIENCE TEXT NOT NULL
-//     )
-    
-// `);
+db.run(` 
+ CREATE TABLE IF NOT EXISTS Employees (
+        EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+         EMPLOYEE_NAME TEXT NOT NULL,
+        IMAGE TEXT NOT NULL,
+        YEARS INTEGER NOT NULL,
+        EXPERIENCE TEXT NOT NULL
+    )
+`);
 
 
 //Avoid duplicate entries
@@ -210,6 +235,7 @@ app.get("/team", (req, res) => {
         res.json(rows);
     });
 });
+
 
 // Start server listening 
 app.listen(port, () => {
